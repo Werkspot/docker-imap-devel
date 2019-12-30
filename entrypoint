@@ -111,6 +111,7 @@ fi
 /usr/sbin/postconf -e mailbox_transport=lmtp:unix:private/dovecot-lmtp
 /usr/sbin/postconf -e virtual_mailbox_domains=/etc/postfix/vhost
 /usr/sbin/postconf -e virtual_mailbox_maps=hash:/etc/postfix/vmailbox
+/usr/sbin/postconf -e header_checks=regexp:/etc/postfix/header_checks
 /usr/sbin/postconf compatibility_level=2
 
 # Create user account
@@ -129,6 +130,7 @@ _add_line "$DEBUG_ADDRESS" "/.+@.+/ $DEBUG_ADDRESS" /etc/postfix/virtual_regexp
 /usr/sbin/postmap /etc/postfix/virtual
 /usr/sbin/postmap /etc/postfix/vmailbox
 /usr/sbin/postmap /etc/postfix/sender_canonical_regexp
+/usr/sbin/postmap /etc/postfix/header_checks
 
 # Configuring Dovecot
 cp -a /usr/share/dovecot/protocols.d /etc/dovecot/
